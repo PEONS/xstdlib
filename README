@@ -5,8 +5,7 @@ Sauvage Tao
 eXtended Standard Library
 
 Our xstdlib was created in order to extend the C standard library.
-We want to add some datatype implementations like List (Simple, Double, ...), Tree and Graph (Binary, ...), but also
-some sorts like bubble sort, heap sort, etc.
+We want to add some datatype implementations like List (Simple, Double, ...), Tree and Graph (Binary, ...), but also some sorts like bubble sort, heap sort, etc.
 
 Repo map:
 	-contiguous
