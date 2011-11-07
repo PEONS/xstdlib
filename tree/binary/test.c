@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "btree.c"
+#include "binarytree.c"
 
 tree cti(int value, tree fg, tree fd);
 
