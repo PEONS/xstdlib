@@ -8,15 +8,5 @@
 
 typedef int Bool;
 
-
-/* Array */
-void print_array(int l, int array[]);
-
-
-/* List */
-void print_list(List l);
-
-
 #endif /* UTILS_H_INCLUDED */
-
 
