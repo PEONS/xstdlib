@@ -10,10 +10,11 @@
 
 int main(void)
 {
-	int *a = malloc(sizeof(int)), *b = malloc(sizeof(int));
+	int *a = malloc(sizeof(int)), *b = malloc(sizeof(int)), *c = malloc(sizeof(int));
 	List l = NULL;
 	*a = 12;
     *b = 15;
+    *c = 4;
 	l = create_list((void*)a);
 
 	printf("Length: %d\n", length_of(l));
@@ -39,7 +40,7 @@ int main(void)
     printf("\nLength: %d\n", length_of(l));
     print_list_of_int(l);
 
-    l = insert_of(l, (void*)a, 2);
+    l = insert_of(l, (void*)c, 2);
     printf("\nLength: %d\n", length_of(l));
     print_list_of_int(l);
 
@@ -57,6 +58,7 @@ int main(void)
     delete_list(l);
 	free(a);
     free(b);
+    free(c);
 	return 0;
 }
 

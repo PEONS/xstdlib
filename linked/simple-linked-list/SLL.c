@@ -143,27 +143,34 @@ List insert_of(List input, void* d, int index)
 
 	if(input != NULL)
 	{
-		current = input;
-		while(current->next != NULL && i <= index)
-		{
-			current = current->next;
-			i = i + 1;
-		}
-		newElem = (Elem*)calloc(1, sizeof(Elem));
-		if(newElem != NULL)
-		{
-		    newElem->data = d;
-			if(i == index)
-			{
-				newElem->next = current->next;
-                current->next = newElem;
-			}
-			else
-			{
-				current->next = newElem;
-				newElem->next = NULL;
-			}
-		}
+        if(index >= 1)
+        {
+            index = index - 1;
+		    current = input;
+		    while(current->next != NULL && i < index)
+		    {
+		    	current = current->next;
+		    	i = i + 1;
+	    	}
+	    	newElem = (Elem*)calloc(1, sizeof(Elem));
+	    	if(newElem != NULL)
+	    	{
+		      newElem->data = d;
+		    	if(i == index)
+		    	{
+		    		newElem->next = current->next;
+                 current->next = newElem;
+		    	}
+		    	else
+		    	{
+		    		newElem->next = NULL;
+		    		current->next = newElem;
+		    	}
+		    }
+            return input;
+        }
+        else
+            return insert_head(input, d);
 	}
 	return create_list(NULL);
 }
