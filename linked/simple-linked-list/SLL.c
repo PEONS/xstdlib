@@ -323,6 +323,8 @@ List reverse(List input)
         current = input;
         while(current != NULL)
         {
+            /* TODO: try to copy the pointer, not the data in order to reverse
+            the list. It's more efficient vis-à-vis of the memory */
             reversedList = insert_head(reversedList, current->data);
             current = current->next;
         }
