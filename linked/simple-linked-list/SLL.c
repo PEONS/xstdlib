@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "SLL.h"
+#include "../../debug/debug.h"
 
 /* Creator & Destructor */
 /*  Return: (List) list newly created
@@ -138,41 +139,42 @@ int length_of(List input)
 	Process: travers the list to reach the n-th place and add the new element */
 List insert_of(List input, void* d, int index)
 {
-	Elem *current = NULL, *newElem = NULL;
-	int i = 0;
+    Elem *current = NULL, *parent = NULL, *newElem = NULL;
+    int i = 1;
 
-	if(input != NULL)
-	{
-        if(index >= 1)
-        {
-            index = index - 1;
-		    current = input;
-		    while(current->next != NULL && i < index)
-		    {
-		    	current = current->next;
-		    	i = i + 1;
-	    	}
-	    	newElem = (Elem*)calloc(1, sizeof(Elem));
-	    	if(newElem != NULL)
-	    	{
-		      newElem->data = d;
-		    	if(i == index)
-		    	{
-		    		newElem->next = current->next;
-                 current->next = newElem;
-		    	}
-		    	else
-		    	{
-		    		newElem->next = NULL;
-		    		current->next = newElem;
-		    	}
-		    }
-            return input;
-        }
-        else
+    if(input != NULL)
+    {
+        /* If index <= 1, we put the new element as the new head of the list */
+        if(index <= 1)
             return insert_head(input, d);
-	}
-	return create_list(NULL);
+        /* Else, we have to found the rigth place */
+        else
+        {
+            newElem = (Elem*)calloc(1, sizeof(Elem));
+            if(newElem != NULL) /* If the allocation succeeded */
+            {
+                newElem->data = d;
+                current = input;
+                while(current != NULL && i < index)
+                {
+                    /* We save the previous element of the current one */
+                    parent = current;
+                    /* And we switch to the next element */
+                    current = current->next;
+                    i = i + 1;
+                }
+                /* The previous element of the current one is now pointing
+                on the new element */
+                parent->next = newElem;
+                /* And the new element is now pointing on the current one */
+                newElem->next = current;
+            }
+        }
+
+        return input;
+    }
+
+    return create_list(d);
 }
 
 /*  Return: (List) list with one more element at the head of the list
@@ -224,28 +226,34 @@ List insert_tail(List input, void* d)
 	Process: travers the list to reach the n-th element and free it */
 List remove_of(List input, int index)
 {
-	Elem *current = NULL, *previous = NULL, *temp = NULL;
-	int i = 0;
+	Elem *current = NULL, *parent = NULL;
+	int i = 1;
 
 	if(input != NULL)
 	{
-		current = input;
-		while(current->next != NULL && i < index)
-		{
-			current = current->next;
-			i = i + 1;
-		}
-		if(current->next != NULL)
-		{
-			previous = current;
-			current = current->next;
-			temp = current;
-			current = current->next;
-			previous->next = current;
-			free(temp);
-			temp = NULL;
-		}
+        if(index <= 1)
+            return remove_head(input);
+        else
+        {
+		    current = input;
+		    while(current != NULL && i < index)
+		    {
+                parent = current;
+			    current = current->next;
+			    i = i + 1;
+		    }
+            if(current == NULL)
+            {
+                /* TODO: remove the last element if the index > length of the list
+                witout using remove_tail */
+                return remove_tail(input);
+            }
+            parent->next = current->next;
+            free(current);
+            current = NULL;
+        }
 	}
+
 	return input;
 }
 
@@ -272,15 +280,21 @@ List remove_head(List input)
 	Process: travers the list and free the last element reached */
 List remove_tail(List input)
 {
-    Elem* current = input;
+    Elem *current = NULL, *parent = NULL;
 
 	if(input != NULL)
     {
+        /* If the list contains at least 1 element */
 	    if(input->next != NULL)
         {
-            while(current->next->next != NULL)
+            current = input;
+            /* We reach the last element and its parent */
+            while(current->next != NULL)
+            {
+                parent = current;
                 current = current->next;
-
+            }
+            parent->next = NULL; /* The parent becomes the new last element */
             free(current->next);
             current->next = NULL;
         }
@@ -296,23 +310,26 @@ List remove_tail(List input)
 
 /*  Return: (List) list reversed
 	Data: input (List) list to reverse
-	Process: travers the list to change each next pointer value */
+	Process: travers the list to create each step a new list
+    copying each data in a new head of the new list */
 List reverse(List input)
 {
-	List newList = NULL;
-	Elem *current = NULL;
+    List reversedList = NULL;
+    Elem *current = NULL;
 
-	if(input != NULL)
-	{
-		newList = input;
-		current = input;
-		while(current->next != NULL)
-		{
-			newList = insert_head(current, current->data);
-			current = current->next;
-		}
-		return newList;
-	}
-	return create_list(NULL);
+    /* If the list contains at least 2 elements */
+    if(input != NULL && input->next != NULL)
+    {
+        current = input;
+        while(current != NULL)
+        {
+            reversedList = insert_head(reversedList, current->data);
+            current = current->next;
+        }
+
+        return reversedList;
+    }
+
+    return input;
 }
 

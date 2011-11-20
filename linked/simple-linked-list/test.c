@@ -17,13 +17,13 @@ int main(void)
     *c = 4;
 	l = create_list((void*)a);
 
-	printf("Length: %d\n", length_of(l));
+	printf("1 - create_list\tLength: %d\n", length_of(l));
     print_list_of_int(l);
 
 	if(!is_empty(l))
 	{
 		l  = insert_head(l, (void*)b);
-	    printf("Length: %d\n", length_of(l));
+	    printf("\n2 - insert_head\tLength: %d\n", length_of(l));
         print_list_of_int(l);
     }
 	else
@@ -32,27 +32,24 @@ int main(void)
 		return 0;
 	}
 
-    l = insert_tail(l, (void*)b);
-	printf("\nLength: %d\n", length_of(l));
+    l = remove_tail(l);
+	printf("\n3 - remove_tail\tLength: %d\n", length_of(l));
     print_list_of_int(l);
 
-    l = insert_head(l, (void*)b);
-    printf("\nLength: %d\n", length_of(l));
+    l = insert_head(l, (void*)a);
+    printf("\n4 - insert_head\tLength: %d\n", length_of(l));
     print_list_of_int(l);
 
     l = insert_of(l, (void*)c, 2);
-    printf("\nLength: %d\n", length_of(l));
+    printf("\n5 - insert_of\tLength: %d\n", length_of(l));
     print_list_of_int(l);
 
     l = remove_of(l, 2);
-    printf("\nLength: %d\n", length_of(l));
+    printf("\n6 - remove_of\tLength: %d\n", length_of(l));
     print_list_of_int(l);
 
     l = reverse(l);
-    printf("\nLength: %d\n", length_of(l));
-    print_list_of_int(l);
-
-    printf("\nLength: %d\n", length_of(l));
+    printf("\n7 - reverse\tLength: %d\n", length_of(l));
     print_list_of_int(l);
 
     delete_list(l);
