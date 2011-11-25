@@ -12,7 +12,7 @@
     Process: use insert_head from SLL library to add the new element */
 List push(List input, void* d)
 {
-    return insert_head(input, data);
+    return insert_head(input, d);
 }
 
 /*  Return: (Elem*) element of the head list
@@ -21,15 +21,12 @@ List push(List input, void* d)
     new element of the list. Meanwhile we save the element and return it */
 Elem* pop(List input)
 {
-    Elem *headElem = NULL, *temp = NULL;
+    Elem *headElem = NULL;
 
     if(!is_empty(input))
     {
         headElem = head(input);
-        temp = input;
-        input = input->next;
-        free(temp);
-        temp = NULL;
+        input = remove_head(input);
     }
 
     return headElem;
