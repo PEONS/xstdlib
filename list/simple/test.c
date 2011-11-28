@@ -5,8 +5,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "SLL.h"
-#include "../../debug/debug.h"
+#include <SLL.h>
+#include <debug.h>
 
 int main(void)
 {
