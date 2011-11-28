@@ -15,12 +15,12 @@ OBJECTSFILES= $(SOURCES:=.o)
 
 all: $(TARGET)
 
-lib: $(LIB)/libSLL.so
+lib: $(LIB)/libBT.so
 
-$(TARGET): $(DEBUG)/debug.o $(LIB)/libSLL.so $(OBJECTSFILES)
+$(TARGET): $(DEBUG)/debug.o $(LIB)/libBT.so $(OBJECTSFILES)
 	$(CXX) $(CCFLAGS) $(LIBDIR) -o $@ $^ -lSLL
 
-$(LIB)/libSLL.so: SLL.c
+$(LIB)/libBT.so: binarytree.c
 	$(CXX) $(CCFLAGS) $(INCLUDEDIR) $< -o $@ -shared -fpic
 
 %.o: %.c

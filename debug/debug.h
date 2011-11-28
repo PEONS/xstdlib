@@ -6,7 +6,7 @@
     Debug:
         Declaration of debug functions for everything */
 
-#include "../linked/simple-linked-list/SLL.h"
+#include <SLL.h>
 
 /* Array's debug functions */
 void print_array_of_int(int*, int);

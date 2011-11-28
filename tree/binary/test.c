@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "binarytree.c"
+#include <binarytree.h>
 
 tree cti(int value, tree fg, tree fd);
 
 int main() {
     tree leaf = cti(15, NULL, NULL);
-    tree root = cti(4, cti(3, cti(1, NULL, NULL), 
-                cti(2, NULL, NULL)), cti(10, cti(7, 
-                cti(5, NULL, NULL), cti(9, NULL, NULL)), 
+    tree root = cti(4, cti(3, cti(1, NULL, NULL),
+                cti(2, NULL, NULL)), cti(10, cti(7,
+                cti(5, NULL, NULL), cti(9, NULL, NULL)),
                 cti(8, NULL, NULL)));
 
     printf("length_tree on root (9): %d\n", length_tree(root));
@@ -34,13 +34,14 @@ int main() {
 
 /* function cti : create_tree_int */
 tree cti(int value, tree fg, tree fd) {
+    tree output = NULL;
     int* tmp = malloc(sizeof(int));
     *tmp = value;
 
-    tree output = malloc(sizeof(node));
+    output = malloc(sizeof(node));
     output->key = tmp;
     output->fg = fg;
     output->fd = fd;
 
-    return output; 
+    return output;
 }

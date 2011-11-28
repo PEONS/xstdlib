@@ -4,7 +4,7 @@
         Implementation of debug functions */
 
 #include <stdio.h>
-#include "debug.h"
+#include <debug.h>
 
 void print_array_of_int(int array[], int length)
 {
