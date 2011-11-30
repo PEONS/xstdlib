@@ -6,11 +6,16 @@
     Stack:
         Declaration of stack datatype, using SLL library */
 
-#include "SLL.h"
+#include <SLL.h>
 
+typedef List Stack;
+
+/* Creator & Destructor */
+Stack create_stack(void*);
+void delete_stack(Stack);
 /* Stack functions */
-List push(List, void*);
-Elem* pop(List);
+Stack push(Stack, void*);
+Elem* pop(Stack*);
 
 #endif /* STACK_H_INCLUDED */
 

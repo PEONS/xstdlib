@@ -6,7 +6,7 @@
 	Simple Linked List:
 		Declaration of simple linked list datatype */
 
-#include "../../utils/utils.h"
+#include <utils.h>
 
 typedef struct elem
 {
