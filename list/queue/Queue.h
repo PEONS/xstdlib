@@ -6,11 +6,16 @@
     Queue:
         Declaration of queue datatype, using SLL library */
 
-#include "SLL.h"
+#include <SLL.h>
 
+typedef List Queue;
+
+/* Creator & Destructor */
+Queue create_queue(void*);
+void delete_queue(Queue);
 /* Queue functions */
-List enter(List, void*);
-Elem* delete(List);
+Queue enter(Queue, void*);
+Elem* delete(Queue*);
 
 #endif /* QUEUE_H_INCLUDED */
 
